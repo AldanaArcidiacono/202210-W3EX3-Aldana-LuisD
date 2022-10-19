@@ -2,7 +2,7 @@ import { TASKS } from '../models/data.js';
 import { Task } from '../models/task.js';
 import { AddTask } from './add.task.js';
 import { Component } from './component.js';
-import { DeleteTask } from './delete.task.js';
+import { Item } from './item.js';
 
 export class TaskList extends Component {
     template!: string;
@@ -15,7 +15,7 @@ export class TaskList extends Component {
         //this.template = this.createTemplate();
         this.render(this.selector, this.template);
         new AddTask('slot#add-task', this.handleAdd.bind(this));
-        new DeleteTask('span.eraser', this.handlerEraser.bind(this));
+        new Item('span.eraser', this.handlerEraser.bind(this));
     }
 
     // createTemplate() {
