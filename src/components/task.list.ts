@@ -2,6 +2,7 @@ import { TASKS } from '../models/data.js';
 import { Task } from '../models/task.js';
 import { AddTask } from './add.task.js';
 import { Component } from './component.js';
+import { DeleteTask } from './delete.task.js';
 
 export class TaskList extends Component {
     template!: string;
@@ -11,36 +12,27 @@ export class TaskList extends Component {
         this.manageComponent();
     }
     manageComponent() {
-        this.template = this.createTemplate();
+        //this.template = this.createTemplate();
         this.render(this.selector, this.template);
         new AddTask('slot#add-task', this.handleAdd.bind(this));
-        setTimeout(() => {
-            document
-                .querySelectorAll('.eraser')
-                .forEach((item) =>
-                    item.addEventListener(
-                        'click',
-                        this.handlerEraser.bind(this)
-                    )
-                );
-        }, 100);
+        new DeleteTask('span.eraser', this.handlerEraser.bind(this));
     }
 
-    createTemplate() {
-        let template = `<section>
-                <h2>Tareas</h2>
-                <slot id="add-task"></slot>
-                <ul>`;
-        this.tasks.forEach((item: Task) => {
-            template += `
-            <li> ${item.id} - ${item.title} 
-            <span class="eraser" data-id="${item.id}">🗑️</span>
-            </li>`;
-        });
-        template += `</ul>
-            </section>`;
-        return template;
-    }
+    // createTemplate() {
+    //     let template = `<section>
+    //             <h2>Tareas</h2>
+    //             <slot id="add-task"></slot>
+    //             <ul>`;
+    //     this.tasks.forEach((item: Task) => {
+    //         template += `
+    //         <li> ${item.id} - ${item.title}
+    //         <span class="eraser" data-id="${item.id}">🗑️</span>
+    //         </li>`;
+    //     });
+    //     template += `</ul>
+    //         </section>`;
+    //     return template;
+    // }
     handleAdd(ev: Event) {
         //ev.preventDefault();
         const title = (document.querySelector('#title') as HTMLInputElement)
