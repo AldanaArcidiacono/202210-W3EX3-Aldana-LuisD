@@ -2,7 +2,7 @@ import { Component } from './component.js';
 import { Task } from '../models/task.js';
 import { TASKS } from '../models/data.js';
 
-export class DeleteTask extends Component {
+export class Item extends Component {
     template: string;
     tasks = [...TASKS];
     constructor(public selector: string, public handle: (ev: Event) => void) {
